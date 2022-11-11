@@ -830,16 +830,19 @@ with tab6:
   tabA, tabB, tabC = st.tabs(['全体', 'バッテリー', 'フロントパネル'])
   
   with tabA:
-    st.subheader('再修理案件一覧')
-    pv = df_M[['機種名','処理内容']]
-    pv = pv.pivot_table(index=['機種名'], columns=['処理内容'], values='処理内容', aggfunc=len)
-    pv = pv.fillna(0)
-    pv = pv.astype('int')
-    pv = pv.T
-    pv.loc['合計'] = pv.sum()
-    pv = pv.T
-    pv = pv.sort_values('合計', ascending=False)
-    st.write(pv)
+    try:
+      st.subheader('再修理案件一覧')
+      pv = df_M[['機種名','処理内容']]
+      pv = pv.pivot_table(index=['機種名'], columns=['処理内容'], values='処理内容', aggfunc=len)
+      pv = pv.fillna(0)
+      pv = pv.astype('int')
+      pv = pv.T
+      pv.loc['合計'] = pv.sum()
+      pv = pv.T
+      pv = pv.sort_values('合計', ascending=False)
+      st.write(pv)
+    except:
+      st.write('### No Data')
   
   with tabB:
     try:
