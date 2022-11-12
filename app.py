@@ -145,6 +145,7 @@ with tab2:
     df_G['郵便番号'] = df_G['郵便番号'].astype(int)
     # モバイルとゲーム機の実績を結合する
     df_M_G = pd.concat([df_M, df_G], axis=0)
+    df_M_G['受付日'] = pd.to_datetime(df_M_G['受付日'], format='%Y/%m/%d')
     df_M_G = df_M_G[(df_M_G['受付日'] >= set_start_day) & (df_M_G['受付日'] <= set_end_day)]
     # 郵便番号・緯度経度・住所表記のデータを読み込む
     df_Adress_Data = pd.read_csv("Zip2Geoc.csv")
